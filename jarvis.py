@@ -12,7 +12,7 @@
 # News report- done
 # Time report - done
 # Calculator- done
-# Dictionary
+# Dictionary - done
 # Email
 # Alarm
 # Reminder

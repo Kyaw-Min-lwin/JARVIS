@@ -1,20 +1,46 @@
 import os
 import subprocess as sp
+from plyer import notification
+from threading import Timer
+import pyautogui, random
 
 paths = {
-    'notepad' : "C:\\Program Files\\Notepad++\\notepad++.exe",
-    'calculator' : "C:\Windows\System32\calc.exe",
-    'command prompt' : "C:\Windows\System32\cmd.exe"
+    "notepad": "C:\\Program Files\\Notepad++\\notepad++.exe",
+    "calculator": "C:\Windows\System32\calc.exe",
+    "command prompt": "C:\Windows\System32\cmd.exe",
 }
 
+
 def open_camera():
-    sp.run('start microsoft.windows.camera:', shell=True)
+    sp.run("start microsoft.windows.camera:", shell=True)
+
 
 def open_notepad():
-    os.startfile(paths['notepad'])
+    os.startfile(paths["notepad"])
+
 
 def open_calculator():
-    os.startfile(paths['calculator'])
+    os.startfile(paths["calculator"])
+
 
 def open_command_prompt():
-    os.startfile(paths['command prompt'])
+    os.startfile(paths["command prompt"])
+
+
+def reminder(title, message, hour, minute):
+    seconds = hour * 3600 + minute * 60
+
+    def notify():
+        notification.notify(
+            title=f"{title}",
+            message=f"{message}",
+            timeout=1,
+        )
+
+    t = Timer(seconds, notify)
+    t.start()
+
+
+def take_screenshot():
+    image = pyautogui.screenshot()
+    image.save(str(random.randint(0, 10000000000)) + ".png")
