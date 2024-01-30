@@ -61,11 +61,12 @@ def speak(text):
 def greet():
     # getting the current hour
     hour = datetime.now().hour
-    if hour > 6 and hour < 12:
+    if hour >= 6 and hour < 12:
         speak("Good morning sir!")
-    elif hour > 12 and hour < 17:
+    elif hour >= 12 and hour <= 17:
         speak("Good afternoon sir!")
     else:
+        print(hour)
         speak("Good evening sir!")
     speak(f"I am {BOTNAME}. How may I assist you?")
 

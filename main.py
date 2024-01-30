@@ -22,8 +22,9 @@ from jarvis import greet, speak, take_user_input
 import requests
 from pprint import pprint
 from datetime import datetime
-import os, webbrowser, sys
+import os, webbrowser, sys, subprocess
 import pywhatkit as kit
+import psutil
 
 if __name__ == "__main__":
     greet()
@@ -34,25 +35,30 @@ if __name__ == "__main__":
             open_notepad()
 
         elif "close notepad" in query:
-            os.system("taskkill /f /im notepad++.exe")
+            subprocess.call("taskkill /f /im notepad++.exe")
 
         elif "open command prompt" in query or "open cmd" in query:
             open_command_prompt()
 
         elif "close command prompt" in query:
-            os.system("taskkill /f /im cmd.exe")
+            subprocess.call("TASKKILL /F /IM cmd.exe")
 
         elif "open camera" in query:
             open_camera()
 
         elif "close camera" in query:
-            os.system("taskkill /f /im camera.exe")
+            subprocess.call(["taskkill", "/F", "/IM", "camera.exe"])
 
         elif "open calculator" in query:
             open_calculator()
 
-        elif "close calculator" in query:
-            os.system("taskkill /f /im calculator.exe")
+        elif (
+            "close calculator" in query
+            or "clothes calculator" in query
+            or "close the calculator"
+        ):
+            print("closing")
+            os.system("taskkill /im C:\\Windows\\System32\\calc.exe /f")
 
         elif "ip address" in query:
             ip_address = find_my_ip()

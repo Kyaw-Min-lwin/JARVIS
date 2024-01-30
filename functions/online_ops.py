@@ -4,6 +4,9 @@ import pywhatkit as kit
 from email.message import EmailMessage
 import smtplib
 from decouple import config
+import imaplib
+import email
+import traceback
 
 NEWS_API_KEY = config("NEWS_API_KEY")
 OPENWEATHER_APP_ID = config("OPENWEATHER_APP_ID")
@@ -70,3 +73,41 @@ def dictionary(query):
         f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
     ).json()[0]["meanings"][0]["definitions"][0]["definition"]
     return definition
+
+
+def read_email():
+    ORG_EMAIL = "@gmail.com"
+    my_email = "kyawminlwinprogrammer" + ORG_EMAIL
+    password = "vxvf mqsy jttm olgu"
+
+    imap_server = "imap.gmail.com"
+    SMTP_PORT = 993
+    print("hi")
+    try:
+        mail = imaplib.IMAP4_SSL(imap_server, SMTP_PORT)
+        mail.login(my_email, password)
+        mail.select("inbox")
+        data = mail.search(None, "ALL")
+        mail_ids = data[1]
+        id_list = mail_ids[0].split()
+        first_email_id = int(id_list[0])
+        latest_email_id = int(id_list[-1])
+        for i in range(latest_email_id, first_email_id, -1):
+            data = mail.fetch(str(i), "(RFC822)")
+            for response_part in data:
+                arr = response_part[0]
+                if isinstance(arr, tuple):
+                    msg = email.message_from_string(str(arr[1], "utf-8"))
+                    print(msg)
+                    continue
+                    email_subject = msg["subject"]
+                    email_from = msg["from"]
+                    print("From : " + email_from + "\n")
+                    print("Subject : " + email_subject + "\n")
+
+    except Exception as e:
+        traceback.print_exc()
+        print(str(e))
+
+
+read_email()
