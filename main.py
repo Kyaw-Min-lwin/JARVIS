@@ -17,6 +17,7 @@ from functions.online_ops import (
     send_whatsapp_message,
     find_my_ip,
     dictionary,
+    download_anime,
 )
 from jarvis import greet, speak, take_user_input
 import requests
@@ -55,7 +56,7 @@ if __name__ == "__main__":
         elif (
             "close calculator" in query
             or "clothes calculator" in query
-            or "close the calculator"
+            or "close the calculator" in query
         ):
             print("closing")
             os.system("taskkill /im C:\\Windows\\System32\\calc.exe /f")
@@ -219,3 +220,14 @@ if __name__ == "__main__":
         elif "take screeenshot" in query or "take a screenshot" in query:
             take_screenshot()
             speak("I am done sir, I saved it to the main folder")
+
+        elif "download anime" in query or "download enemy" in query:
+            speak("Sir, would you like to enter the anime name by speech")
+            t_or_f = take_user_input().lower()
+            print(t_or_f)
+            if t_or_f == "yes":
+                speak("Sir please say the anime name")
+                anime = take_user_input().lower()
+                download_anime(anime)
+            else:
+                download_anime()
