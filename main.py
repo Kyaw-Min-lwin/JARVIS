@@ -5,6 +5,7 @@ from functions.os_ops import (
     open_notepad,
     reminder,
     take_screenshot,
+    pdf_reader,
 )
 from functions.online_ops import (
     get_latest_news,
@@ -47,7 +48,7 @@ if __name__ == "__main__":
         elif "open camera" in query:
             open_camera()
 
-        elif "close camera" in query:
+        elif "close camera" in query or "clothes camera" in query:
             subprocess.call(["taskkill", "/F", "/IM", "camera.exe"])
 
         elif "open calculator" in query:
@@ -231,3 +232,6 @@ if __name__ == "__main__":
                 download_anime(anime)
             else:
                 download_anime()
+
+        elif "read pdf" in query or "read book" in query or "read file" in query:
+            pdf_reader()
