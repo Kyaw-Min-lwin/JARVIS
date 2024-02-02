@@ -10,6 +10,8 @@ sys.path.append("../JARVIS")
 from jarvis import speak, take_user_input
 import tkinter as tk
 from tkinter import filedialog
+from tkinter import ttk
+from tkinter import simpledialog
 
 paths = {
     "notepad": "C:\\Program Files\\Notepad++\\notepad++.exe",
@@ -66,7 +68,10 @@ def pdf_reader():
             text = page.extract_text()
             speak(text)
     else:
-        pass
+        page_number = simpledialog.askinteger("Page", "Enter page number")
+        page = pdfReader.pages[page_number]
+        text = page.extract_text()
+        speak(text)
 
 
 pdf_reader()
