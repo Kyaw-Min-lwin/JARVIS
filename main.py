@@ -37,19 +37,19 @@ if __name__ == "__main__":
             open_notepad()
 
         elif "close notepad" in query:
-            subprocess.call("taskkill /f /im notepad++.exe")
+            os.system("taskkill /F /im notepad.exe")
 
         elif "open command prompt" in query or "open cmd" in query:
             open_command_prompt()
 
         elif "close command prompt" in query:
-            subprocess.call("TASKKILL /F /IM cmd.exe")
+            os.system("taskkill /F /im cmd.exe")
 
         elif "open camera" in query:
             open_camera()
 
         elif "close camera" in query or "clothes camera" in query:
-            subprocess.call(["taskkill", "/F", "/IM", "camera.exe"])
+            os.system("taskkill /F /im camera.exe")
 
         elif "open calculator" in query:
             open_calculator()
@@ -59,8 +59,7 @@ if __name__ == "__main__":
             or "clothes calculator" in query
             or "close the calculator" in query
         ):
-            print("closing")
-            os.system("taskkill /im C:\\Windows\\System32\\calc.exe /f")
+            os.system("taskkill /F /im calculator.exe")
 
         elif "ip address" in query:
             ip_address = find_my_ip()

@@ -8,9 +8,7 @@ import sys
 
 sys.path.append("../JARVIS")
 from jarvis import speak, take_user_input
-import tkinter as tk
 from tkinter import filedialog
-from tkinter import ttk
 from tkinter import simpledialog
 
 paths = {
@@ -72,6 +70,3 @@ def pdf_reader():
         page = pdfReader.pages[page_number]
         text = page.extract_text()
         speak(text)
-
-
-pdf_reader()
